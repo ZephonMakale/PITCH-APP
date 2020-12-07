@@ -53,16 +53,24 @@
           <li><a href="{{url_for('about')}}">About</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
+          {% if current_user.is_authenticated %}
           <li>
-            <a href="{{url_for('register')}}"
+            <a href="{{url_for('logout')}}"
+            ><span class="glyphicon glyphicon-log-out"></span>Logout</a
+          >
+          </li>
+          {% else %}
+            <li>
+              <a href="{{url_for('register')}}"
               ><span class="glyphicon glyphicon-user"></span>Register</a
             >
-          </li>
-          <li>
-            <a href="{{url_for('login')}}"
+            </li>
+            <li>
+              <a href="{{url_for('login')}}"
               ><span class="glyphicon glyphicon-log-in"></span> Login</a
             >
-          </li>
+            </li>
+          {% endif %}
         </ul>
       </div>
     </nav>
