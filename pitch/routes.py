@@ -2,6 +2,7 @@ from flask import render_template, url_for, flash, redirect
 from pitch import app, db, bcrypt
 from pitch.forms import RegistrationForm, LoginForm
 from pitch.models import User, Post
+from flask_login import login_user
 
 posts = [
     {
@@ -44,9 +45,10 @@ def register():
 def login():
     form = LoginForm()
     if form.validate_on_submit():
-        if form.email.data == 'admin@pitch.com' and form.password.data == 'password':
-            flash('You have been logged in!', 'success')
+        user = User.query.filter_by(email=form.email.data).first()
+        if user and bcrypt.check_password_hash(user.password, form.password.data):
+            login_user(user, remember=form.remember.data)
             return redirect(url_for('home'))
         else:
-            flash('Login Unsuccessful, please check your username and password again', 'danger')
+            flash('Login Unsuccessful, please check your email and password again', 'danger')
     return render_template('login.html', title = 'Login', form = form)
