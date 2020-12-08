@@ -10,10 +10,12 @@
                 </div>
                 <h2><a class="article-title" href="{{url_for('posts.post', post_id=post.id)}}">{{post.title}}</a></h2>
                 <p class="article-content">{{post.content}}</p>
-                <p>{{post.comment.count()}}Comments</p>
-                <span><a href="{{url_for('posts.like')}}"><i class="fa fa-thumbs-up" style="font-size: 15px;color: red"></i>{{post.upvote.count()}}</a></span> 
-                <span><a href="{{url_for('posts.dislike')}}"><i class="fa fa-thumbs-down" style="font-size: 15px;color: black"></i>{{post.downvote.count()}}</a></span>     
-                <a href="{{url_for(posts.comment, post_id = category.id)}}" class="btn btn-info btn-sm">Comment</a>  
+                <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{{url_for('posts.comment', post_id = post.id)}}">Comment</a>
+                
+                <!-- <button type="button" class="btn btn-outline-succes btn-sm"><a href="/comment/{{post.id}}">Comment</a></button> -->
+                
+                
+                 
             </div>
         </article>
     {% endfor %}

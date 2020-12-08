@@ -1,6 +1,6 @@
 from flask_script import Manager, Server
 from flask_migrate import Migrate, MigrateCommand
-from pitch.models import User, Post, Comment, Upvote, Downvote
+from pitch.models import User, Post, Comment
 from pitch import create_app, db
 
 

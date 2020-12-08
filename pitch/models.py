@@ -9,6 +9,7 @@ def load_user(user_id):
     return User.query.get(int(user_id))
 
 class User(db.Model, UserMixin):
+    __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key = True)
     username = db.Column(db.String(20), unique = True, nullable = False)
     email = db.Column(db.String(120), unique = True, nullable = False)
@@ -35,11 +36,12 @@ class User(db.Model, UserMixin):
         return f"User('{self.username}','{self.email}','{self.image_file}')"
 
 class Post(db.Model):
+    __tablename__ = 'posts'
     id = db.Column(db.Integer, primary_key = True)
     title = db.Column(db.String(100), nullable = False)
     date_posted = db.Column(db.DateTime, nullable = False, default=datetime.utcnow)
     content = db.Column(db.Text, nullable = False)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable = False)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable = False)
 
     def __repr__(self):
         return f"Post('{self.title}', '{self.date_posted}')"
@@ -48,8 +50,8 @@ class Comment(db.Model):
     __tablename__ = 'comments'
     id = db.Column(db.Integer,primary_key = True)
     comment = db.Column(db.Text(), nullable = False)
-    user_id = db.Column(db.Integer,db.ForeignKey("User.id"), nullable = False)
-    post_id = db.Column(db.Integer,db.ForeignKey("Post.id"), nullable= False)
+    user_id = db.Column(db.Integer,db.ForeignKey("users.id"), nullable = False)
+    post_id = db.Column(db.Integer,db.ForeignKey("posts.id"), nullable= False)
 
     def save_comment(self):
         db.session.add(self)
@@ -58,44 +60,43 @@ class Comment(db.Model):
     @classmethod
     def get_comments(cls,id):
         comments = Comment.query.filter_by(post_id=id).all()
-
         return comments
     def __repr__(self):
-        return f'comment:{self.comment}'
+        return f'Comment:{self.comment}'
 
-class Upvote(db.Model):
-    __tablename__ = 'upvotes'
-    id = db.Column(db.Integer,primary_key = True)
-    user_id = db.Column(db.Integer,db.ForeignKey("users.id"))
-    post_id = db.Column(db.Integer,db.ForeignKey("posts.id"))
+# class Upvote(db.Model):
+#     __tablename__ = 'upvotes'
+#     id = db.Column(db.Integer,primary_key = True)
+#     user_id = db.Column(db.Integer,db.ForeignKey("users.id"))
+#     post_id = db.Column(db.Integer,db.ForeignKey("posts.id"))
 
-    def save(self):
-        db.session.add(self)
-        db.session.commit()
+#     def save(self):
+#         db.session.add(self)
+#         db.session.commit()
 
-    @classmethod
-    def get_upvotes(cls,id):
-        upvote = Upvote.query.filter_by(post_id=id).all()
-        return upvote
+#     @classmethod
+#     def get_upvotes(cls,id):
+#         upvote = Upvote.query.filter_by(post_id=id).all()
+#         return upvote
 
-    def __repr__(self):
-        return f'{self.user_id}:{self.pitch_id}'
+#     def __repr__(self):
+#         return f'{self.user_id}:{self.pitch_id}'
 
-class Downvote(db.Model):
-    __tablename__ = 'downvotes'
-    id = db.Column(db.Integer,primary_key = True)
-    user_id = db.Column(db.Integer,db.ForeignKey("users.id"))
-    post_id = db.Column(db.Integer,db.ForeignKey("posts.id"))
+# class Downvote(db.Model):
+#     __tablename__ = 'downvotes'
+#     id = db.Column(db.Integer,primary_key = True)
+#     user_id = db.Column(db.Integer,db.ForeignKey("users.id"))
+#     post_id = db.Column(db.Integer,db.ForeignKey("posts.id"))
 
-    def save(self):
-        db.session.add(self)
-        db.session.commit()
+#     def save(self):
+#         db.session.add(self)
+#         db.session.commit()
 
-    @classmethod
-    def get_downvotes(cls,id):
-        downvote = Downvote.query.filter_by(post_id=id).all()
-        return downvote
+#     @classmethod
+#     def get_downvotes(cls,id):
+#         downvote = Downvote.query.filter_by(post_id=id).all()
+#         return downvote
 
-    def __repr__(self):
-        return f'{self.user_id}:{self.pitch_id}'
+#     def __repr__(self):
+#         return f'{self.user_id}:{self.pitch_id}'
 
