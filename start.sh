@@ -1,6 +1,5 @@
-export MOVIE_API_KEY=<Your api key>
-export SECRET_KEY=<Your secret key>
-
-heroku config:set MAIL_USERNAME=<YOUR EMAIL ADDRESS>
+export SECRET_KEY='pitch'
+export MAIL_PASSWORD='EMAIL_PASS'
+export MAIL_USERNAME='MAIL_USER'
 
 python3.8 manage.py server
