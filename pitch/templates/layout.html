@@ -49,34 +49,34 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="nav navbar-nav">
-          <li class="active"><a class="active" href="{{url_for('home')}}">Home</a></li>
-          <li><a href="{{url_for('about')}}">About</a></li>
+          <li class="active"><a class="active" href="{{url_for('main.home')}}">Home</a></li>
+          <li><a href="{{url_for('main.about')}}">About</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
           {% if current_user.is_authenticated %}
           <li>
-            <a href="{{url_for('new_post')}}"
+            <a href="{{url_for('posts.new_post')}}"
             ><span class="glyphicon glyphicon-pencil"></span>New Post</a
           >
           </li>
           <li>
-            <a href="{{url_for('account')}}"
+            <a href="{{url_for('users.account')}}"
             ><span class="glyphicon glyphicon-user"></span>Account</a
           >
           </li>
           <li>
-            <a href="{{url_for('logout')}}"
+            <a href="{{url_for('users.logout')}}"
             ><span class="glyphicon glyphicon-log-out"></span>Logout</a
           >
           </li>
           {% else %}
             <li>
-              <a href="{{url_for('register')}}"
+              <a href="{{url_for('users.register')}}"
               ><span class="glyphicon glyphicon-user"></span>Register</a
             >
             </li>
             <li>
-              <a href="{{url_for('login')}}"
+              <a href="{{url_for('users.login')}}"
               ><span class="glyphicon glyphicon-log-in"></span> Login</a
             >
             </li>
