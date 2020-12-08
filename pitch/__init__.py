@@ -29,9 +29,11 @@ def create_app(config_class=Config):
     from pitch.users.routes import users
     from pitch.posts.routes import posts
     from pitch.main.routes import main
+    from pitch.errors.handlers import errors
     app.register_blueprint(users)
     app.register_blueprint(posts)
     app.register_blueprint(main)
+    app.register_blueprint(errors)
 
     return app
 
