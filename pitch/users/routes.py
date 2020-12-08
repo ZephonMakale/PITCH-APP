@@ -3,7 +3,7 @@ from flask_login import login_user, current_user, logout_user, login_required
 from pitch import db, bcrypt
 from pitch.models import User, Post
 from pitch.users.forms import RegistrationForm, LoginForm, UpdateAccountForm, RequestResetForm, ResetPasswordForm
-from pitch.users.utils import save_picture, send_reset_email
+from pitch.users.utils import save_picture, send_reset_email, mail_message
 
 users = Blueprint('users', __name__)
 
@@ -17,7 +17,11 @@ def register():
         user = User(username = form.username.data, email = form.email.data, password = hashed_password)
         db.session.add(user)
         db.session.commit()
+
+        mail_message("Welcome to PitchApp", "emails/welcome_user", user.email, user=user)
+
         flash('Your account has been created! You are now able to log in','success')
+        
         return redirect(url_for('users.login'))
     return render_template('register.html', title = 'Register', form = form)
 

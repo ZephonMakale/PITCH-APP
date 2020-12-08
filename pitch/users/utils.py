@@ -1,7 +1,7 @@
 import os
 import secrets
 from PIL import Image
-from flask import url_for, current_app
+from flask import url_for, current_app, render_template
 from flask_mail import Message
 from pitch import mail
 
@@ -27,3 +27,11 @@ def send_reset_email(user):
     If  you did not make this request, simply ignore this email and no changes will be made.
     '''
     mail.send(msg)
+
+def mail_message(subject,template,to,**kwargs):
+    sender_email = 'zephon.makalle@gmail.com'
+
+    email = Message(subject, sender=sender_email, recipients=[to])
+    email.body= render_template(template + ".txt",**kwargs)
+    email.html = render_template(template + ".html",**kwargs)
+    mail.send(email)
