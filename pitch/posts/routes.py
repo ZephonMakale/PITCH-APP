@@ -52,19 +52,10 @@ def delete_post(post_id):
     flash('Your post has been deleted!', 'success')
     return redirect(url_for('main.home'))
 
-# @posts.route("/comment/<id>")
-# @login_required
-# def comment(id):
-#         commet = Comment.get_comments(id)
-#         print(commet)
-#         title = 'Comment'
-#     return render_template('comment.html', comment = commet, title = title)
-
 @posts.route("/comment/<int:post_id>/comment", methods = ['GET', 'POST'])
 @login_required
 def comment(post_id):
     title = 'New Post'
-    # post = Post.query.get(post_id)
     all_comments = Post.query.filter_by(id = post_id).first()
     form = CommentForm()
     if form.validate_on_submit():

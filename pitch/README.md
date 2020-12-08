@@ -13,6 +13,8 @@ The user would want to:
 * Comment on other user's pitches.
 ## Technologies used
 I created the project with (python 3.8), Flask-Microframework.
+## The live link
+Here is the link to my project https://zeph-pitch-app.herokuapp.com
 
 ## Setup/Installation Requirements
  ### The project require the following installations
