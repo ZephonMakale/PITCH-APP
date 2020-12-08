@@ -19,7 +19,7 @@ def test():
 
 @manager.shell
 def make_shell_context():
-    return dict(app =app,db = db, User = User, Post =Post)
+    return dict(app =app,db = db, User = User, Post =Post, Comment = Comment)
 
 migrate = Migrate(app,db)
 manager.add_command('db',MigrateCommand)
