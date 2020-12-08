@@ -4,8 +4,9 @@ from pitch.models import User, Post, Comment
 from pitch import create_app, db
 
 
-
+app = create_app('development')
 app = create_app('production')
+
 
 manager = Manager(app)
 manager.add_command('server',Server)

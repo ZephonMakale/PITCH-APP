@@ -20,8 +20,8 @@ class Config:
 
 
 class ProdConfig(Config):
-    DEBUG = False
     SQLALCHEMY_DATABASE_URI = os.environ.get("DATABASE_URL")
+
 class TestConfig(Config):
     SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://macbookpro:1Chelsea@localhost/pitch_test'
 
