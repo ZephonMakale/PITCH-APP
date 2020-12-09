@@ -1,5 +1,5 @@
 import unittest
-from pitch.models import Post
+from  pitch.models import Post
 
 class PostModelTest(unittest.TestCase):
     def setUp(self):
