@@ -52,7 +52,7 @@ def delete_post(post_id):
     flash('Your post has been deleted!', 'success')
     return redirect(url_for('main.home'))
 
-@posts.route("/comment/<int:post_id>/comment", methods = ['GET', 'POST'])
+@posts.route("/comment/<int:post_id>/comment", methods = ['GET','POST'])
 @login_required
 def comment(post_id):
     title = 'New Post'
